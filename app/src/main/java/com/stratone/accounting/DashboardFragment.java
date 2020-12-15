@@ -1,5 +1,6 @@
 package com.stratone.accounting;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
+import android.widget.GridView;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +30,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class DashboardFragment extends Fragment {
+    private PieChart pieChart;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +76,30 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        pieChart = (PieChart) rootView.findViewById(R.id.pieChart);
+        ArrayList<PieEntry> visitors = new ArrayList<>();
+        visitors.add(new PieEntry(420, "2014"));
+        visitors.add(new PieEntry(475, "2015"));
+        visitors.add(new PieEntry(508, "2016"));
+        visitors.add(new PieEntry(660,"2017"));
+        visitors.add(new PieEntry(550, "2018"));
+        visitors.add(new PieEntry(630,"2019"));
+        visitors.add(new PieEntry(470,"2020"));
+
+        PieDataSet pieDataSet = new PieDataSet(visitors,"Visitors");
+        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieDataSet.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueTextSize(16f);
+
+        PieData pieData = new PieData(pieDataSet);
+
+        pieChart.setData(pieData);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setCenterText("Visitors");
+        pieChart.animate();
+
+        return rootView;
     }
 }

@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_home"
-        android:icon="@drawable/home_icon"
-        android:title="Home" />
+        android:id="@+id/nav_input"
+        android:icon="@drawable/input_icon"
+        android:title="Input" />
 
     <item
-        android:id="@+id/nav_favorite"
+        android:id="@+id/nav_master"
         android:icon="@drawable/favorite_icon"
-        android:title="Favorite" />
+        android:title="Master" />
 
     <item
-        android:id="@+id/nav_search"
+        android:id="@+id/nav_output"
         android:icon="@drawable/search_icon"
-        android:title="Search" />
+        android:title="Output" />
+
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/setting_icon"
+        android:title="Setting" />
 </menu>

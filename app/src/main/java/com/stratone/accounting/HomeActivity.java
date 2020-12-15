@@ -35,11 +35,14 @@ public class HomeActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId())
                 {
-                    case R.id.nav_home:
+                    case R.id.nav_input:
                         selectedFragment = new HomeFragment();
                         break;
-                    case R.id.nav_favorite:
+                    case R.id.nav_master:
                         selectedFragment = new DashboardFragment();
+                        break;
+                    case R.id.nav_setting:
+                        selectedFragment = new SettingFragment();
                         break;
                 }
 

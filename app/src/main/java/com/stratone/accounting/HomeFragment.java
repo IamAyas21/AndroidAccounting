@@ -1,6 +1,7 @@
 package com.stratone.accounting;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -11,13 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-    private GridLayout mainGrid;
+    private BarChart barChart;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -63,27 +72,29 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        mainGrid = (GridLayout) rootView.findViewById(R.id.mainGrid);
-        setSingleEvent(mainGrid);
+
+        barChart = (BarChart)rootView.findViewById(R.id.barChart);
+        ArrayList<BarEntry> visitors = new ArrayList<>();
+        visitors.add(new BarEntry(2014,420));
+        visitors.add(new BarEntry(2015,475));
+        visitors.add(new BarEntry(2016,508));
+        visitors.add(new BarEntry(2017,660));
+        visitors.add(new BarEntry(2018,550));
+        visitors.add(new BarEntry(2019,630));
+        visitors.add(new BarEntry(2020,470));
+
+        BarDataSet barDataSet = new BarDataSet(visitors,"Visitors");
+        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        barDataSet.setValueTextColor(Color.BLACK);
+        barDataSet.setValueTextSize(16f);
+
+        BarData barData = new BarData(barDataSet);
+
+        barChart.setFitBars(true);
+        barChart.setData(barData);
+        barChart.getDescription().setText("Bar Chart Example");
+        barChart.animateY(2000);
+
         return rootView;
-    }
-
-    private void setSingleEvent(GridLayout mainGrid) {
-        //Loop all child item of Main Grid
-        for (int i = 0; i < mainGrid.getChildCount(); i++) {
-            //You can see , all child item is CardView , so we just cast object to CardView
-            CardView cardView = (CardView) mainGrid.getChildAt(i);
-            final int finalI = i;
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Intent intent = new Intent(getActivity(),HomeFragment.class);
-                    intent.putExtra("info","This is activity from card item index  "+finalI);
-                    startActivity(intent);
-
-                }
-            });
-        }
     }
 }
