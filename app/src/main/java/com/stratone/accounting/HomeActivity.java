@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,10 +16,10 @@ public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView bottom_navigation;
     private FrameLayout frameLayout;
     private HomeFragment homeFragment;
-    private DashboardFragment dashboardFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -40,6 +41,9 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_master:
                         selectedFragment = new DashboardFragment();
+                        break;
+                    case R.id.nav_output:
+                        selectedFragment = new OutputFragment();
                         break;
                     case R.id.nav_setting:
                         selectedFragment = new SettingFragment();
