@@ -6,8 +6,9 @@ android:layout_height="match_parent"
 android:padding="10dp"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 tools:context=".HomeFragment">
-<com.github.mikephil.charting.charts.BarChart
+    <include layout="@layout/filler_accounting"/>
+<!--<com.github.mikephil.charting.charts.BarChart
     android:id="@+id/barChart"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"/>-->
 </FrameLayout>

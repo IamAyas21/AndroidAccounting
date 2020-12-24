@@ -6,11 +6,13 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -27,6 +29,10 @@ import java.util.ArrayList;
  */
 public class HomeFragment extends Fragment {
     private BarChart barChart;
+
+    private InputFragment inputFragment;
+    private RelativeLayout rl_input;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -73,7 +79,16 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        barChart = (BarChart)rootView.findViewById(R.id.barChart);
+        rl_input = rootView.findViewById(R.id.rl_input);
+        rl_input.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputFragment = new InputFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,inputFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+            }
+        });
+        /*barChart = (BarChart)rootView.findViewById(R.id.barChart);
         ArrayList<BarEntry> visitors = new ArrayList<>();
         visitors.add(new BarEntry(2014,420));
         visitors.add(new BarEntry(2015,475));
@@ -85,7 +100,7 @@ public class HomeFragment extends Fragment {
 
         BarDataSet barDataSet = new BarDataSet(visitors,"Visitors");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        barDataSet.setValueTextColor(Color.WHITE);
+        barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(16f);
 
         BarData barData = new BarData(barDataSet);
@@ -93,7 +108,7 @@ public class HomeFragment extends Fragment {
         barChart.setFitBars(true);
         barChart.setData(barData);
         barChart.getDescription().setText("Bar Chart Example");
-        barChart.animateY(2000);
+        barChart.animateY(2000);*/
 
         return rootView;
     }

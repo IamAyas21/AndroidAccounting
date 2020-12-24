@@ -82,7 +82,7 @@ public class SettingFragment extends Fragment {
         arrayList.add(new RadarEntry(470));
 
         RadarDataSet radarDataSet = new RadarDataSet(arrayList,"Website 1");
-        radarDataSet.setColor(Color.WHITE);
+        radarDataSet.setColor(Color.BLACK);
         radarDataSet.setLineWidth(2f);
         radarDataSet.setValueTextColor(Color.RED);
         radarDataSet.setValueTextSize(14f);

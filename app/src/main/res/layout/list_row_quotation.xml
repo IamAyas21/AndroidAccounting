@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/item_quotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:text="Item Quotation"/>
+
+    <TextView
+        android:id="@+id/item_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_quotation"
+        android:maxLines="2"
+        android:maxLength="50"
+        style="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+        android:text="Description Quotation"/>
+
+   <!-- <TextView
+        android:id="@+id/item_qty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_description"
+        style="@style/TextAppearance.AppCompat.Small"
+        android:text="12"/>
+
+    <TextView
+        android:id="@+id/item_multiply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_description"
+        android:layout_toRightOf="@+id/item_qty"
+        style="@style/TextAppearance.AppCompat.Small"
+        android:text="x"/>
+
+    <TextView
+        android:id="@+id/item_unit_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_description"
+        android:layout_toRightOf="@+id/item_multiply"
+        style="@style/TextAppearance.AppCompat.Small"
+        android:text="1.000.000"/>-->
+
+
+</RelativeLayout>

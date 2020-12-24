@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +22,14 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.stratone.accounting.model.CashFlow;
+import com.stratone.accounting.response.ResponseCashFlow;
+import com.stratone.accounting.rest.ApiClient;
+import com.stratone.accounting.rest.ApiInterface;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.PrimitiveIterator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +39,8 @@ import java.util.ArrayList;
 public class OutputFragment extends Fragment {
 
     private LineChart lineChart;
+    private ApiInterface apiService;
+    private List<CashFlow> listCashFlows;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,25 +89,50 @@ public class OutputFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_output, container, false);
 
         lineChart = (LineChart) rootView.findViewById(R.id.lineChart);
-        ArrayList<Entry> visitors = new ArrayList<Entry>();
-        visitors.add(new Entry(0, 2014));
-        visitors.add(new Entry(1, 2015));
-        visitors.add(new Entry(2, 2016));
-        visitors.add(new Entry(3,2017));
-        visitors.add(new Entry(4, 2018));
-        visitors.add(new Entry(5,2019));
-        visitors.add(new Entry(6,2020));
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        apiService.ChartCashFlow("123","2020").enqueue(new Callback<ResponseCashFlow>() {
+            @Override
+            public void onResponse(Call<ResponseCashFlow> call, Response<ResponseCashFlow> response) {
+                if(response.isSuccessful())
+                {
+                    if(response.body().getStatus().equals("success"))
+                    {
+                        listCashFlows = response.body().getData();
+                        ArrayList<Entry> visitors = new ArrayList<Entry>();
 
-        LineDataSet lineDataSet = new LineDataSet(visitors,"Visitors");
-        lineDataSet.setValueTextColor(Color.WHITE);
+                        for(int i = 0;i < listCashFlows.size();i++)
+                        {
+                            visitors = new ArrayList<Entry>();
+                            visitors.add(new Entry(Integer.parseInt(listCashFlows.get(i).getD()), 2014));
+                        }
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(lineDataSet);
+                        visitors.add(new Entry(0, 2014));
+                        visitors.add(new Entry(1, 2015));
+                        visitors.add(new Entry(2, 2016));
+                        visitors.add(new Entry(3,2017));
+                        visitors.add(new Entry(4, 2018));
+                        visitors.add(new Entry(5,2019));
+                        visitors.add(new Entry(6,2020));
 
-        LineData lineData = new LineData(lineDataSet);
+                        LineDataSet lineDataSet = new LineDataSet(visitors,"Visitors");
+                        lineDataSet.setValueTextColor(Color.WHITE);
 
-        lineChart.setData(lineData);
-        lineChart.invalidate();
+                        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                        dataSets.add(lineDataSet);
+
+                        LineData lineData = new LineData(lineDataSet);
+
+                        lineChart.setData(lineData);
+                        lineChart.invalidate();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseCashFlow> call, Throwable t) {
+
+            }
+        });
 
         return rootView;
     }
