@@ -62,18 +62,4 @@ public class HomeActivity extends AppCompatActivity {
             }
         });*/
     }
-
-    @Override
-    public void onBackPressed() {
-        tellFragments();
-        super.onBackPressed();
-    }
-
-    private void tellFragments(){
-        List<Fragment> fragments = getSupportFragmentManager().getFragments();
-        for(Fragment f : fragments){
-            if(f != null && f instanceof BaseFragment)
-                ((BaseFragment)f).onBackPressed();
-        }
-    }
 }

@@ -2,13 +2,16 @@ package com.stratone.accounting;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.stratone.accounting.adapter.QuotationAdapter;
 import com.stratone.accounting.model.Quotation;
 
@@ -19,8 +22,13 @@ import java.util.ArrayList;
  * Use the {@link QuotationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuotationFragment extends Fragment {
+public class QuotationFragment extends Fragment{
+    private InputFragment inputFragment;
+    private NewQuotationFragment newQuotationFragment;
+
     private ListView listView_quotation;
+    private FloatingActionButton addNewQuotation;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,6 +63,18 @@ public class QuotationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                inputFragment = new InputFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,inputFragment )
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -67,11 +87,22 @@ public class QuotationFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_quotation, container, false);
         listView_quotation = (ListView) rootView.findViewById(R.id.listView_quotation);
+        addNewQuotation = (FloatingActionButton)rootView.findViewById(R.id.add_new_quotation);
+
+        addNewQuotation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newQuotationFragment = new NewQuotationFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,newQuotationFragment )
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+            }
+        });
 
         ArrayList<Quotation> quotations = new ArrayList<>();
         quotations.add(new Quotation("Aquatic timing system","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",12,100,1200));
         quotations.add(new Quotation("Athletic timing system","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",12,100,1200));
-        quotations.add(new Quotation("Scoreboard Display CCTV","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",12,100,1200));
+        quotations.add(new Quotation("Scoreboard Display","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",12,100,1200));
+        quotations.add(new Quotation("CCTV","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",12,100,1200));
         quotations.add(new Quotation("Access Control","Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",12,100,1200));
 
         QuotationAdapter quotationAdapter = new QuotationAdapter(getActivity(),R.layout.list_row_quotation,quotations);
