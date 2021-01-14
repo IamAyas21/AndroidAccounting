@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RebFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_reb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cardview_light_background"
+                android:gravity="center"
+                android:textSize="24dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Retained Earning"/>
+    </androidx.appcompat.widget.Toolbar>
+    <RelativeLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_reb"
+        android:padding="20dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_start_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Start Date"
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:startIconDrawable="@drawable/icon_calendar"
+            app:startIconTint="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/start_date_reb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat_light"
+                android:focusable="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_end_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_start_date"
+            android:hint="End Date"
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:startIconDrawable="@drawable/icon_calendar"
+            app:startIconTint="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/end_date_reb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/montserrat_light"
+                android:focusable="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_go_reb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_end_date"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/montserrat_light"
+            android:elevation="5dp"
+            android:text="Go"
+            android:textColor="@color/cardview_light_background" />
+
+        <TextView
+            android:id="@+id/tv_title_reb_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_go_reb"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_marginTop="20dp"
+            android:text="Saldo Per"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_title_reb_eg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title_reb_id"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Balance Per "
+            android:textSize="14dp"
+            android:textStyle="italic" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_title">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <View
+                android:id="@+id/view_modal_saham"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/ll_title"
+                android:background="@android:color/darker_gray"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_modal_saham"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:layout_below="@+id/view_modal_saham"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_modal_saham_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Modal Saham"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_modal_saham_eg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_modal_saham_id"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Capital Stock"
+                        android:textSize="12dp"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_modal_saham_amt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:text="9,999,999"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:id="@+id/view_tambahan_modal"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/ll_modal_saham"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"></View>
+            <LinearLayout
+                android:id="@+id/ll_tambahan_modal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_below="@+id/view_tambahan_modal"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_tambahan_modal_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Tambahan Modal Disetor"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_tambahan_modal_eg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_tambahan_modal_id"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Additional Paid-in Capital"
+                        android:textSize="12dp"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_tambahan_modal_amt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:text="9,999,999"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_saldo_awal"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/ll_tambahan_modal"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_saldo_laba_awal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/view_saldo_awal"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_saldo_laba_awal_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="SALDO Laba Awal"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_saldo_laba_awal_eg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_saldo_laba_awal_id"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Initial Earnings Balance"
+                        android:textSize="12dp"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_saldo_laba_awal_amt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:text="9,999,999"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_jml_ekuitas_awal"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/ll_saldo_laba_awal"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_jumlah_ekuitas_awal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/view_jml_ekuitas_awal"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_jumlah_ekuitas_awal_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:textStyle="bold"
+                        android:text="Jumlah Ekuitas Awal"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_jumlah_ekuitas_awal_eg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_jumlah_ekuitas_awal_id"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Initial Equity Amount"
+                        android:textSize="12dp"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_jumlah_ekuitas_awal_amt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:text="9,999,999"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:id="@+id/view_laba_tahun"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/ll_jumlah_ekuitas_awal"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"></View>
+            <LinearLayout
+                android:id="@+id/ll_laba_tahun_berjalan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/view_laba_tahun"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_jumlah_laba_tahun_berjalan_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Jumlah Laba (Rugi) Tahun Berjalan"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_jumlah_laba_tahun_berjalan_eg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_jumlah_laba_tahun_berjalan_id"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Total Current Profit (Loss)"
+                        android:textSize="12dp"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_jumlah_laba_tahun_berjalan_amt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:text="9,999,999"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_dividen"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/ll_laba_tahun_berjalan"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_dividen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/view_dividen"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_dividen_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Dividen"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_dividen_eg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_dividen_id"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Dividend"
+                        android:textSize="12dp"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_dividen_amt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_light"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:text="9,999,999"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_saldo_per"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/ll_dividen"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"></View>
+
+            <LinearLayout
+                android:id="@+id/ll_saldo_per"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="20dp"
+                android:layout_below="@+id/view_saldo_per"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_saldo_per_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Saldo Per"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_saldo_per_eg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_saldo_per_id"
+                        android:fontFamily="@font/montserrat_light"
+                        android:text="Balance Per"
+                        android:textSize="12dp"
+                        android:textStyle="italic" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tv_saldo_per_amt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:gravity="right"
+                        android:text="9,999,999"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/ll_saldo_per"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@android:color/darker_gray"></View>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

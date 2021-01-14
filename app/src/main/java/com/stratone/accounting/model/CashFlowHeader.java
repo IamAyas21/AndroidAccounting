@@ -1,8 +1,11 @@
 package com.stratone.accounting.model;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CashFlow {
+import java.util.List;
+
+public class CashFlowHeader {
     @SerializedName("Group")
     @Expose
     private String group;
@@ -12,21 +15,15 @@ public class CashFlow {
     @SerializedName("ACC")
     @Expose
     private String aCC;
-    @SerializedName("Name")
-    @Expose
-    private String name;
-    @SerializedName("Name2")
-    @Expose
-    private String name2;
-    @SerializedName("Value")
-    @Expose
-    private String value;
     @SerializedName("Sum")
     @Expose
     private String sum;
     @SerializedName("SortId")
     @Expose
     private Integer sortId;
+    @SerializedName("Data")
+    @Expose
+    private List<CashFlowDetail> data = null;
 
     public String getGroup() {
         return group;
@@ -52,30 +49,6 @@ public class CashFlow {
         this.aCC = aCC;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName2() {
-        return name2;
-    }
-
-    public void setName2(String name2) {
-        this.name2 = name2;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
     public String getSum() {
         return sum;
     }
@@ -90,5 +63,13 @@ public class CashFlow {
 
     public void setSortId(Integer sortId) {
         this.sortId = sortId;
+    }
+
+    public List<CashFlowDetail> getData() {
+        return data;
+    }
+
+    public void setData(List<CashFlowDetail> data) {
+        this.data = data;
     }
 }

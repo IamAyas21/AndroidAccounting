@@ -90,49 +90,6 @@ public class OutputFragment extends Fragment {
 
         lineChart = (LineChart) rootView.findViewById(R.id.lineChart);
         apiService = ApiClient.getClient().create(ApiInterface.class);
-        apiService.ChartCashFlow("123","2020").enqueue(new Callback<ResponseCashFlow>() {
-            @Override
-            public void onResponse(Call<ResponseCashFlow> call, Response<ResponseCashFlow> response) {
-                if(response.isSuccessful())
-                {
-                    if(response.body().getStatus().equals("success"))
-                    {
-                        listCashFlows = response.body().getData();
-                        ArrayList<Entry> visitors = new ArrayList<Entry>();
-
-                        for(int i = 0;i < listCashFlows.size();i++)
-                        {
-                            visitors = new ArrayList<Entry>();
-                            visitors.add(new Entry(Integer.parseInt(listCashFlows.get(i).getD()), 2014));
-                        }
-
-                        visitors.add(new Entry(0, 2014));
-                        visitors.add(new Entry(1, 2015));
-                        visitors.add(new Entry(2, 2016));
-                        visitors.add(new Entry(3,2017));
-                        visitors.add(new Entry(4, 2018));
-                        visitors.add(new Entry(5,2019));
-                        visitors.add(new Entry(6,2020));
-
-                        LineDataSet lineDataSet = new LineDataSet(visitors,"Visitors");
-                        lineDataSet.setValueTextColor(Color.WHITE);
-
-                        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                        dataSets.add(lineDataSet);
-
-                        LineData lineData = new LineData(lineDataSet);
-
-                        lineChart.setData(lineData);
-                        lineChart.invalidate();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseCashFlow> call, Throwable t) {
-
-            }
-        });
 
         return rootView;
     }

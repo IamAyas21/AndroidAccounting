@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.stratone.accounting.adapter.OutputDashboardAdapter;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,10 @@ public class HomeFragment extends Fragment {
     private BarChart barChart;
 
     private InputFragment inputFragment;
+    private OuputDashboardFragment outputDashboardFragment;
+
     private RelativeLayout rl_input;
+    private RelativeLayout rl_output;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -88,6 +92,17 @@ public class HomeFragment extends Fragment {
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
             }
         });
+
+        rl_output = rootView.findViewById(R.id.rl_output);
+        rl_output.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                outputDashboardFragment = new OuputDashboardFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,outputDashboardFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+            }
+        });
+
         /*barChart = (BarChart)rootView.findViewById(R.id.barChart);
         ArrayList<BarEntry> visitors = new ArrayList<>();
         visitors.add(new BarEntry(2014,420));

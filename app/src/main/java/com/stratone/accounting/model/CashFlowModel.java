@@ -1,14 +1,11 @@
-package com.stratone.accounting.response;
+package com.stratone.accounting.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.stratone.accounting.model.CashFlow;
-import com.stratone.accounting.model.CashFlowHeader;
-import com.stratone.accounting.model.CashFlowModel;
 
 import java.util.List;
 
-public class ResponseCashFlow {
+public class CashFlowModel {
     @SerializedName("status")
     @Expose
     private String status;
