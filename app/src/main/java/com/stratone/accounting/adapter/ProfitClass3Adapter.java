@@ -1,12 +1,16 @@
 package com.stratone.accounting.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.stratone.accounting.ProfitLossClass2Fragment;
+import com.stratone.accounting.ProfitLossClass3Fragment;
 import com.stratone.accounting.R;
 import com.stratone.accounting.model.CashFlowDetail;
 import com.stratone.accounting.model.CashFlowHeader;
@@ -16,16 +20,27 @@ import com.stratone.accounting.model.ProfitLossClass3;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 public class ProfitClass3Adapter extends BaseExpandableListAdapter{
     private Context context;
     private List<ProfitLossClass3> expandableListTitle;
     private HashMap<ProfitLossClass3, List<ProfitLossClass2>> expandableListDetail;
-
-    public ProfitClass3Adapter(Context context, List<ProfitLossClass3> expandableListTitle,
-                               HashMap<ProfitLossClass3, List<ProfitLossClass2>> expandableListDetail) {
+    private String sDate;
+    private String eDate;
+    private String aClassId;
+    private String page;
+    public ProfitClass3Adapter(Context context, List<ProfitLossClass3> expandableListTitle
+                            , HashMap<ProfitLossClass3, List<ProfitLossClass2>> expandableListDetail
+                            , String startDate, String endDate, String aClassId, String page) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
         this.expandableListDetail = expandableListDetail;
+        this.sDate = startDate;
+        this.eDate = endDate;
+        this.aClassId = aClassId;
+        this.page = page;
     }
 
     @Override
@@ -49,6 +64,7 @@ public class ProfitClass3Adapter extends BaseExpandableListAdapter{
             convertView = layoutInflater.inflate(R.layout.list_row_cash_flow_detail, null);
         }
 
+        LinearLayout linearLayout = (LinearLayout) convertView.findViewById(R.id.ll_title);
         TextView textViewCashFlowId = (TextView) convertView.findViewById(R.id.item_cash_flow_id_1);
         TextView textViewCashFlowEg = (TextView) convertView.findViewById(R.id.item_cash_flow_eg_1);
         TextView textViewAmtCashFlow = (TextView) convertView.findViewById(R.id.amount_cash_flow_1);
@@ -57,6 +73,26 @@ public class ProfitClass3Adapter extends BaseExpandableListAdapter{
         textViewCashFlowEg.setText(expandedListText.getTitleEg());
         textViewAmtCashFlow.setText(expandedListText.getAmount());
         textViewAmtCashFlow.setText(expandedListText.getAmount().replace("(","").replace(")",""));
+
+        if(page == "2")
+        {
+            linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("aClassId", aClassId);
+                    bundle.putString("bClassId", expandedListText.getClassId());
+                    bundle.putString("startDate", sDate);
+                    bundle.putString("endDate", eDate);
+                    ProfitLossClass3Fragment profitLossClass3Fragment = new ProfitLossClass3Fragment();
+                    profitLossClass3Fragment.setArguments(bundle);
+
+                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,profitLossClass3Fragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                }
+            });
+        }
 
         if(expandedListText.getAmount().contains("("))
         {

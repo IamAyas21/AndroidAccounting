@@ -18,21 +18,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.stratone.accounting.adapter.CashFlowAdapter;
-import com.stratone.accounting.adapter.CashFlowDetailAdapter;
-import com.stratone.accounting.adapter.CashFlowTotalAdapter;
 import com.stratone.accounting.adapter.ProfitClass3Adapter;
 import com.stratone.accounting.adapter.ProfitLossClass2Adapter;
-import com.stratone.accounting.model.CashFlowDetail;
-import com.stratone.accounting.model.CashFlowHeader;
-import com.stratone.accounting.model.ProfitLossClass1;
 import com.stratone.accounting.model.ProfitLossClass2;
 import com.stratone.accounting.model.ProfitLossClass3;
-import com.stratone.accounting.response.ResponseCashFlow;
-import com.stratone.accounting.response.ResponseCashFlowTotal;
 import com.stratone.accounting.response.ResponseProfitLossClass2;
 import com.stratone.accounting.rest.ApiClient;
 import com.stratone.accounting.rest.ApiInterface;
@@ -45,10 +36,10 @@ import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfitLossClass2Fragment#newInstance} factory method to
+ * Use the {@link ProfitLossClass3Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfitLossClass2Fragment extends Fragment {
+public class ProfitLossClass3Fragment extends Fragment {
     private String aClassId;
     private String bClassId;
     private String sDate;
@@ -78,7 +69,7 @@ public class ProfitLossClass2Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ProfitLossClass2Fragment() {
+    public ProfitLossClass3Fragment() {
         // Required empty public constructor
     }
 
@@ -88,11 +79,11 @@ public class ProfitLossClass2Fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfitLossClass2Fragment.
+     * @return A new instance of fragment ProfitLossClass3Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfitLossClass2Fragment newInstance(String param1, String param2) {
-        ProfitLossClass2Fragment fragment = new ProfitLossClass2Fragment();
+    public static ProfitLossClass3Fragment newInstance(String param1, String param2) {
+        ProfitLossClass3Fragment fragment = new ProfitLossClass3Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -112,15 +103,16 @@ public class ProfitLossClass2Fragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                ProfitLossClass1Fragment profitLossClass1Fragment = new ProfitLossClass1Fragment();
+                ProfitLossClass2Fragment profitLossClass2Fragment = new ProfitLossClass2Fragment();
                 Bundle bundle=new Bundle();
                 bundle.putString("aClassId", aClassId);
                 bundle.putString("bClassId", bClassId);
                 bundle.putString("startDate", sDate);
                 bundle.putString("endDate", eDate);
 
-                profitLossClass1Fragment.setArguments(bundle);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,profitLossClass1Fragment)
+                profitLossClass2Fragment.setArguments(bundle);
+
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,profitLossClass2Fragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
             }
         };
@@ -131,7 +123,7 @@ public class ProfitLossClass2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_profit_loss_class2, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_profit_loss_class3, container, false);
         startDate = (EditText)rootView.findViewById(R.id.start_date);
         endDate = (EditText)rootView.findViewById(R.id.end_date);
         expandableListView = (ExpandableListView)rootView.findViewById(R.id.listview_class2);
@@ -174,6 +166,7 @@ public class ProfitLossClass2Fragment extends Fragment {
         });
 
         aClassId = getArguments().getString("aClassId");
+        bClassId = getArguments().getString("bClassId");
         sDate = getArguments().getString("startDate");
         eDate = getArguments().getString("endDate");
 
@@ -186,16 +179,15 @@ public class ProfitLossClass2Fragment extends Fragment {
         }
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
-        ListClass2(aClassId,"",startDate.getText().toString(),endDate.getText().toString());
+        ListClass3(bClassId,"",startDate.getText().toString(),endDate.getText().toString());
 
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 apiService = ApiClient.getClient().create(ApiInterface.class);
-                ListClass2(aClassId,"",startDate.getText().toString(),endDate.getText().toString());
+                ListClass3(bClassId,"",startDate.getText().toString(),endDate.getText().toString());
             }
         });
-
         return rootView;
     }
 
@@ -213,15 +205,15 @@ public class ProfitLossClass2Fragment extends Fragment {
         endDate.setText(sdf.format(myCalendar.getTime()));
     }
 
-    private void ListClass2(String classId, String userId, final String startDate, final String endDate) {
-        apiService.ProfitLossClass2(userId, startDate, endDate, classId).enqueue(new Callback<ResponseProfitLossClass2>() {
+    private void ListClass3(String classId, String userId, final String startDate, final String endDate) {
+        apiService.ProfitLossClass3(userId, startDate, endDate, classId).enqueue(new Callback<ResponseProfitLossClass2>() {
             @Override
             public void onResponse(Call<ResponseProfitLossClass2> call, Response<ResponseProfitLossClass2> response) {
                 if(response.body().getStatus().equals("success"))
                 {
                     expandableListTitle = response.body().getData();
                     expandableListDetail = ProfitLossClass2Adapter.getData(response.body().getData());
-                    expandableListAdapter = new ProfitClass3Adapter(getActivity(), expandableListTitle, expandableListDetail, startDate, endDate,aClassId,"2");
+                    expandableListAdapter = new ProfitClass3Adapter(getActivity(), expandableListTitle, expandableListDetail,startDate,endDate,aClassId,"3");
                     expandableListView.setAdapter(expandableListAdapter);
                     expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 

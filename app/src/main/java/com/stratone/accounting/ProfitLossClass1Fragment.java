@@ -42,6 +42,9 @@ import java.util.Locale;
  * create an instance of this fragment.
  */
 public class ProfitLossClass1Fragment extends Fragment {
+    private String classId;
+    private String sDate;
+    private String eDate;
 
     private ListView listView;
     private ApiInterface apiService;
@@ -152,12 +155,25 @@ public class ProfitLossClass1Fragment extends Fragment {
             }
         });
 
+        if(getArguments() != null)
+        {
+            sDate = getArguments().getString("startDate");
+            eDate = getArguments().getString("endDate");
+        }
+
         if(startDate.getText().toString().equals("") && endDate.getText().toString().equals(""))
         {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             String date = dateFormat.format(myCalendar.getTime());
-            startDate.setText(date);
-            endDate.setText(date);
+
+            if(sDate == null && eDate == null)
+            {
+                sDate = date;
+                eDate = date;
+            }
+
+            startDate.setText(sDate);
+            endDate.setText(eDate);
         }
 
         apiService = ApiClient.getClient().create(ApiInterface.class);

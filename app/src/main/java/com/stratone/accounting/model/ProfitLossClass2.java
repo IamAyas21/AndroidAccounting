@@ -4,6 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ProfitLossClass2 {
+    @SerializedName("ClassId")
+    @Expose
+    private String classId;
     @SerializedName("TitleId")
     @Expose
     private String titleId;
@@ -13,7 +16,13 @@ public class ProfitLossClass2 {
     @SerializedName("Amount")
     @Expose
     private String amount;
+    public String getClassId() {
+        return classId;
+    }
 
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
     public String getTitleId() {
         return titleId;
     }

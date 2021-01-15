@@ -71,9 +71,10 @@ public class ProfitLossClass1Adapter extends ArrayAdapter<ProfitLossClass1> {
             @Override
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
-                bundle.putString("classId", getItem(position).getClassId());
+                bundle.putString("aClassId", getItem(position).getClassId());
                 bundle.putString("startDate", sDate);
                 bundle.putString("endDate", eDate);
+                bundle.putString("page", "1");
                 ProfitLossClass2Fragment profitLossClass2Fragment = new ProfitLossClass2Fragment();
                 profitLossClass2Fragment.setArguments(bundle);
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();

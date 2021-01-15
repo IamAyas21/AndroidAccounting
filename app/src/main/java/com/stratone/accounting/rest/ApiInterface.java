@@ -61,4 +61,13 @@ public interface  ApiInterface {
             @Field("endDate") String endDate,
             @Field("classId") String classId
     );
+
+    @FormUrlEncoded
+    @POST("api/ProfitLoss/Class3")
+    Call<ResponseProfitLossClass2> ProfitLossClass3(
+            @Field("userId") String userId,
+            @Field("startDate") String startDate,
+            @Field("endDate") String endDate,
+            @Field("classId") String classId
+    );
 }
