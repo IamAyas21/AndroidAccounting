@@ -112,14 +112,14 @@ public class ProfitLossClass2Fragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                ProfitLossClass1Fragment profitLossClass1Fragment = new ProfitLossClass1Fragment();
-                Bundle bundle=new Bundle();
+                ProfitLossClass1Fragment profitLossClass1Fragment = SessionFragment(aClassId,bClassId,sDate,eDate);
+                /*Bundle bundle=new Bundle();
                 bundle.putString("aClassId", aClassId);
                 bundle.putString("bClassId", bClassId);
                 bundle.putString("startDate", sDate);
                 bundle.putString("endDate", eDate);
 
-                profitLossClass1Fragment.setArguments(bundle);
+                profitLossClass1Fragment.setArguments(bundle);*/
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,profitLossClass1Fragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
             }
@@ -193,6 +193,7 @@ public class ProfitLossClass2Fragment extends Fragment {
             public void onClick(View v) {
                 apiService = ApiClient.getClient().create(ApiInterface.class);
                 ListClass2(aClassId,"",startDate.getText().toString(),endDate.getText().toString());
+                SessionFragment(aClassId,bClassId,startDate.getText().toString(),endDate.getText().toString());
             }
         });
 
@@ -257,5 +258,22 @@ public class ProfitLossClass2Fragment extends Fragment {
                 Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private ProfitLossClass1Fragment SessionFragment(String aClassId, String bClassId, String startDate, String endDate)
+    {
+        ProfitLossClass1Fragment profitLossClass1Fragment = new ProfitLossClass1Fragment();
+        Bundle bundle=new Bundle();
+
+        sDate = startDate;
+        eDate = endDate;
+
+        bundle.putString("aClassId", aClassId);
+        bundle.putString("bClassId", bClassId);
+        bundle.putString("startDate", startDate);
+        bundle.putString("endDate", endDate);
+
+        profitLossClass1Fragment.setArguments(bundle);
+        return profitLossClass1Fragment;
     }
 }
