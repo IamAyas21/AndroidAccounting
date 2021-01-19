@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.stratone.accounting.CashFlowFragment;
+import com.stratone.accounting.NeracaClass1Fragment;
 import com.stratone.accounting.ProfitLossClass1Fragment;
 import com.stratone.accounting.R;
 import com.stratone.accounting.RebFragment;
@@ -72,6 +73,14 @@ public class OutputDashboardAdapter extends ArrayAdapter<Output> {
                     ProfitLossClass1Fragment profitLossClass1Fragment = new ProfitLossClass1Fragment();
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,profitLossClass1Fragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+
+                }
+                else if(getItem(position).getItemMenuOutput().equals("Financial Position"))
+                {
+                    NeracaClass1Fragment neracaClass1Fragment = new NeracaClass1Fragment();
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,neracaClass1Fragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
 
                 }

@@ -9,13 +9,10 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.stratone.accounting.ProfitLossClass2Fragment;
-import com.stratone.accounting.ProfitLossClass3Fragment;
+import com.stratone.accounting.NeracaClass3Fragment;
 import com.stratone.accounting.R;
-import com.stratone.accounting.model.CashFlowDetail;
-import com.stratone.accounting.model.CashFlowHeader;
-import com.stratone.accounting.model.ProfitLossClass2;
-import com.stratone.accounting.model.ProfitLossClass3;
+import com.stratone.accounting.model.NeracaClass2;
+import com.stratone.accounting.model.NeracaClass3;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,16 +20,16 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-public class ProfitClass3Adapter extends BaseExpandableListAdapter{
+public class NeracaClass3Adapter extends BaseExpandableListAdapter{
     private Context context;
-    private List<ProfitLossClass3> expandableListTitle;
-    private HashMap<ProfitLossClass3, List<ProfitLossClass2>> expandableListDetail;
+    private List<NeracaClass3> expandableListTitle;
+    private HashMap<NeracaClass3, List<NeracaClass2>> expandableListDetail;
     private String sDate;
     private String eDate;
     private String aClassId;
     private String page;
-    public ProfitClass3Adapter(Context context, List<ProfitLossClass3> expandableListTitle
-                            , HashMap<ProfitLossClass3, List<ProfitLossClass2>> expandableListDetail
+    public NeracaClass3Adapter(Context context, List<NeracaClass3> expandableListTitle
+                            , HashMap<NeracaClass3, List<NeracaClass2>> expandableListDetail
                             , String startDate, String endDate, String aClassId, String page) {
         this.context = context;
         this.expandableListTitle = expandableListTitle;
@@ -57,7 +54,7 @@ public class ProfitClass3Adapter extends BaseExpandableListAdapter{
     @Override
     public View getChildView(int listPosition, final int expandedListPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        final ProfitLossClass2 expandedListText = (ProfitLossClass2) getChild(listPosition, expandedListPosition);
+        final NeracaClass2 expandedListText = (NeracaClass2) getChild(listPosition, expandedListPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -71,7 +68,7 @@ public class ProfitClass3Adapter extends BaseExpandableListAdapter{
 
         textViewCashFlowId.setText(expandedListText.getTitleId());
         textViewCashFlowEg.setText(expandedListText.getTitleEg());
-        textViewAmtCashFlow.setText(expandedListText.getAmount());
+        //textViewAmtCashFlow.setText(expandedListText.getAmount());
         textViewAmtCashFlow.setText(expandedListText.getAmount().replace("(","").replace(")",""));
 
         if(page == "2")
@@ -84,11 +81,11 @@ public class ProfitClass3Adapter extends BaseExpandableListAdapter{
                     bundle.putString("bClassId", expandedListText.getClassId());
                     bundle.putString("startDate", sDate);
                     bundle.putString("endDate", eDate);
-                    ProfitLossClass3Fragment profitLossClass3Fragment = new ProfitLossClass3Fragment();
-                    profitLossClass3Fragment.setArguments(bundle);
+                    NeracaClass3Fragment NeracaClass3Fragment = new NeracaClass3Fragment();
+                    NeracaClass3Fragment.setArguments(bundle);
 
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,profitLossClass3Fragment)
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,NeracaClass3Fragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
                 }
             });
@@ -132,7 +129,7 @@ public class ProfitClass3Adapter extends BaseExpandableListAdapter{
     @Override
     public View getGroupView(int listPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        ProfitLossClass3 listTitle = (ProfitLossClass3) getGroup(listPosition);
+        NeracaClass3 listTitle = (NeracaClass3) getGroup(listPosition);
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) this.context.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
