@@ -14,6 +14,7 @@ import com.stratone.accounting.NeracaClass1Fragment;
 import com.stratone.accounting.ProfitLossClass1Fragment;
 import com.stratone.accounting.R;
 import com.stratone.accounting.RebFragment;
+import com.stratone.accounting.TrialBalanceFragment;
 import com.stratone.accounting.model.Output;
 import com.stratone.accounting.model.ProfitLossClass1;
 import com.stratone.accounting.model.Quotation;
@@ -81,6 +82,14 @@ public class OutputDashboardAdapter extends ArrayAdapter<Output> {
                     NeracaClass1Fragment neracaClass1Fragment = new NeracaClass1Fragment();
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,neracaClass1Fragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+
+                }
+                else if(getItem(position).getItemMenuOutput().equals("Trial Balance"))
+                {
+                    TrialBalanceFragment trialBalanceFragment = new TrialBalanceFragment();
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,trialBalanceFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
 
                 }

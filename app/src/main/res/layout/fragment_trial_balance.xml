@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrialBalanceFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="Trial Balance"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="24dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/footer"
+        android:layout_below="@id/header"
+        android:padding="20dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_start_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Start Date"
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:startIconDrawable="@drawable/icon_calendar"
+            app:startIconTint="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/start_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:fontFamily="@font/montserrat_light" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_end_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_start_date"
+            android:hint="End Date"
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorPrimary"
+            app:hintTextColor="@color/colorPrimary"
+            app:startIconDrawable="@drawable/icon_calendar"
+            app:startIconTint="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/end_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:fontFamily="@font/montserrat_light" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_go"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_end_date"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorPrimary"
+            android:elevation="5dp"
+            android:fontFamily="@font/montserrat_light"
+            android:text="Go"
+            android:textColor="@color/cardview_light_background" />
+
+        <LinearLayout
+            android:id="@+id/ll_listview"
+            android:layout_below="@+id/btn_go"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <ListView
+                android:id="@+id/listview_trial_balance"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="0.5dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:weightSum="3">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="TOTAL" />
+
+                
+                <TextView
+                    android:id="@+id/tv_total_initial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_total"
+                    android:gravity="right"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="Initial" />
+
+                <TextView
+                    android:id="@+id/tv_total_mutation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_below="@+id/tv_total_initial"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="Mutation" />
+
+                <TextView
+                    android:id="@+id/tv_total_ending"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_below="@+id/tv_total_mutation"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="Ending" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_total_debit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Debit" />
+
+                <TextView
+                    android:id="@+id/tv_total_debit_initial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_below="@+id/tv_total_debit"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="1.000.000" />
+
+                <TextView
+                    android:id="@+id/tv_total_debit_mutation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_below="@+id/tv_total_debit_initial"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="1.000.000" />
+
+                <TextView
+                    android:id="@+id/tv_total_debit_ending"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_below="@+id/tv_total_debit_mutation"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="1.000.000" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_total_credit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Credit" />
+
+                <TextView
+                    android:id="@+id/tv_total_credit_initial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_below="@+id/tv_total_credit"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="1.000.000" />
+
+                <TextView
+                    android:id="@+id/tv_total_credit_mutation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_below="@+id/tv_total_credit_initial"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="1.000.000" />
+
+                <TextView
+                    android:id="@+id/tv_total_credit_ending"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_below="@+id/tv_total_credit_mutation"
+                    android:fontFamily="@font/montserrat_light"
+                    android:text="1.000.000" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

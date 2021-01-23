@@ -9,6 +9,7 @@ import com.stratone.accounting.response.ResponseNeracaClass2;
 import com.stratone.accounting.response.ResponseProfitLossClass1;
 import com.stratone.accounting.response.ResponseProfitLossClass2;
 import com.stratone.accounting.response.ResponseReb;
+import com.stratone.accounting.response.ResponseTrialBalance;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -98,5 +99,13 @@ public interface  ApiInterface {
             @Field("startDate") String startDate,
             @Field("endDate") String endDate,
             @Field("classId") String classId
+    );
+
+    @FormUrlEncoded
+    @POST("api/TrialBalance/List")
+    Call<ResponseTrialBalance> TrialBalance(
+            @Field("userId") String userId,
+            @Field("startDate") String startDate,
+            @Field("endDate") String endDate
     );
 }
