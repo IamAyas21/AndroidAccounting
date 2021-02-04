@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.stratone.accounting.CashFlowFragment;
+import com.stratone.accounting.LedgerFragment;
 import com.stratone.accounting.NeracaClass1Fragment;
 import com.stratone.accounting.ProfitLossClass1Fragment;
 import com.stratone.accounting.R;
@@ -90,6 +91,14 @@ public class OutputDashboardAdapter extends ArrayAdapter<Output> {
                     TrialBalanceFragment trialBalanceFragment = new TrialBalanceFragment();
                     AppCompatActivity activity = (AppCompatActivity) view.getContext();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,trialBalanceFragment)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+
+                }
+                else if(getItem(position).getItemMenuOutput().equals("General Ledger"))
+                {
+                    LedgerFragment ledgerFragment = new LedgerFragment();
+                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,ledgerFragment)
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
 
                 }

@@ -1,9 +1,11 @@
 package com.stratone.accounting.rest;
 
 import com.stratone.accounting.model.NeracaClass1;
+import com.stratone.accounting.response.ResponseCOA;
 import com.stratone.accounting.response.ResponseCashFlow;
 import com.stratone.accounting.response.ResponseCashFlowTotal;
 import com.stratone.accounting.response.ResponseDashboard;
+import com.stratone.accounting.response.ResponseLedger;
 import com.stratone.accounting.response.ResponseNeracaClass1;
 import com.stratone.accounting.response.ResponseNeracaClass2;
 import com.stratone.accounting.response.ResponseProfitLossClass1;
@@ -107,5 +109,20 @@ public interface  ApiInterface {
             @Field("userId") String userId,
             @Field("startDate") String startDate,
             @Field("endDate") String endDate
+    );
+
+    @FormUrlEncoded
+    @POST("api/Ledger/List")
+    Call<ResponseLedger> GeneralLedger(
+            @Field("userId") String userId,
+            @Field("startDate") String startDate,
+            @Field("endDate") String endDate,
+            @Field("accountNo") String accountNo
+    );
+
+    @FormUrlEncoded
+    @POST("api/COA/List")
+    Call<ResponseCOA> COA(
+            @Field("userId") String userId
     );
 }
