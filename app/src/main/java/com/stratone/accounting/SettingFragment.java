@@ -13,8 +13,6 @@ import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
-import com.github.mikephil.charting.data.RadarEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
 
@@ -71,31 +69,6 @@ public class SettingFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        radarChart = (RadarChart)rootView.findViewById(R.id.radarChart);
-        ArrayList<RadarEntry> arrayList = new ArrayList<>();
-        arrayList.add(new RadarEntry(420));
-        arrayList.add(new RadarEntry(475));
-        arrayList.add(new RadarEntry(508));
-        arrayList.add(new RadarEntry(660));
-        arrayList.add(new RadarEntry(550));
-        arrayList.add(new RadarEntry(630));
-        arrayList.add(new RadarEntry(470));
-
-        RadarDataSet radarDataSet = new RadarDataSet(arrayList,"Website 1");
-        radarDataSet.setColor(Color.BLACK);
-        radarDataSet.setLineWidth(2f);
-        radarDataSet.setValueTextColor(Color.RED);
-        radarDataSet.setValueTextSize(14f);
-
-        RadarData radarData = new RadarData();
-        radarData.addDataSet(radarDataSet);
-
-        String[] labels = {"2014","2015","2016","2017","2018","2019","2020"};
-
-        XAxis xAxis = radarChart.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
-
-        radarChart.setData(radarData);
         return rootView;
     }
 }

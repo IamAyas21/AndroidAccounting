@@ -4,6 +4,9 @@ import com.stratone.accounting.model.NeracaClass1;
 import com.stratone.accounting.response.ResponseCOA;
 import com.stratone.accounting.response.ResponseCashFlow;
 import com.stratone.accounting.response.ResponseCashFlowTotal;
+import com.stratone.accounting.response.ResponseChartBankBalance;
+import com.stratone.accounting.response.ResponseChartCashFlow;
+import com.stratone.accounting.response.ResponseChartProfitLoss;
 import com.stratone.accounting.response.ResponseDashboard;
 import com.stratone.accounting.response.ResponseLedger;
 import com.stratone.accounting.response.ResponseNeracaClass1;
@@ -22,7 +25,21 @@ import retrofit2.http.POST;
 public interface  ApiInterface {
     @FormUrlEncoded
     @POST("api/Dashboard/ChartCashFlow")
-    Call<ResponseDashboard> ChartCashFlow(
+    Call<ResponseChartCashFlow> ChartCashFlow(
+            @Field("userId") String userId,
+            @Field("year") String year
+    );
+
+    @FormUrlEncoded
+    @POST("api/Dashboard/ChartProfitLoss")
+    Call<ResponseChartProfitLoss> ChartProfitLoss(
+            @Field("userId") String userId,
+            @Field("year") String year
+    );
+
+    @FormUrlEncoded
+    @POST("api/Dashboard/ChartBankBalance")
+    Call<ResponseChartBankBalance> ChartBankBalance(
             @Field("userId") String userId,
             @Field("year") String year
     );

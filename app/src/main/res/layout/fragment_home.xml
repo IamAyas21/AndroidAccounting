@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="10dp"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-tools:context=".HomeFragment">
-    <include layout="@layout/filler_accounting"/>
-<!--<com.github.mikephil.charting.charts.BarChart
-    android:id="@+id/barChart"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>-->
-</FrameLayout>
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".HomeFragment">
+
+      <LinearLayout
+          android:id="@+id/menu_dashboard"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+
+          <include layout="@layout/filler_accounting" />
+      </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/menu_dashboard">
+        <LinearLayout
+            android:id="@+id/chart_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_cash_flow"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_profit_loss"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_bank_balance"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
