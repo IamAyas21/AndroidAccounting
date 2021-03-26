@@ -16,11 +16,18 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.stratone.accounting.model.ChartBankBalance;
 import com.stratone.accounting.model.ChartCashFlow;
 import com.stratone.accounting.model.ChartProfitLoss;
@@ -47,6 +54,8 @@ public class HomeFragment extends Fragment {
 
     private LineChart chartBankBalance;
     private LineData dataBankBalance;
+
+    private BarChart chartDebtReceivables;
 
     private List<ChartCashFlow> chartCashFlowList;
     private List<ChartProfitLoss> chartProfitLosses;
@@ -108,6 +117,7 @@ public class HomeFragment extends Fragment {
         chartCashFlow = rootView.findViewById(R.id.chart_cash_flow);
         chartProfitLoss = rootView.findViewById(R.id.chart_profit_loss);
         chartBankBalance = rootView.findViewById(R.id.chart_bank_balance);
+        chartDebtReceivables = rootView.findViewById(R.id.chart_debts_receivables);
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
         ChartCashFlow("123","2019");
@@ -136,6 +146,7 @@ public class HomeFragment extends Fragment {
 
         return rootView;
     }
+
 
     private void ChartCashFlow(String userId, String year)
     {
@@ -223,6 +234,43 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+    private void ChartDebtReceivables(String userId, String year)
+    {
+        chartDebtReceivables.setDrawBarShadow(false);
+        chartDebtReceivables.setDrawValueAboveBar(true);
+        chartDebtReceivables.setMaxVisibleValueCount(50);
+        chartDebtReceivables.setPinchZoom(false);
+        chartDebtReceivables.setDrawGridBackground(true);
+
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        barEntries.add(new BarEntry(1, (int) 40f));
+        barEntries.add(new BarEntry(1,(int)44f));
+        barEntries.add(new BarEntry(1,(int)30f));
+        barEntries.add(new BarEntry(1,(int)36f));
+
+        BarDataSet barDataSet = new BarDataSet(barEntries,"Piutang");
+        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        BarData data = new BarData((List<String>) barDataSet);
+        chartDebtReceivables.setData(data);
+
+        String[] months = new String[]{"Jan","Feb","Mar","Apr","May"};
+        XAxis xAxis = chartBankBalance.getXAxis();
+        /*xAxis.setValueFormatter(new MyAxisValueFormatter(months));*/
+    }
+
+    /*public class MyAxisValueFormatter implements IAxisValueFormatter{
+        private String[] mValues;
+        public MyAxisValueFormatter(String[] values)
+        {
+            this.mValues = values;
+        }
+        public String getFormattedValue(float value, AxisBase axis)
+        {
+            return mValues[(int)value];
+        }
+    }*/
 
     private List<ILineDataSet> getLineDataCashFlowValues(List<ChartCashFlow> chartCashFlowList)
     {

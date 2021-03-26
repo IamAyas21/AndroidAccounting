@@ -1,6 +1,7 @@
 package com.stratone.accounting.rest;
 
 import com.stratone.accounting.model.NeracaClass1;
+import com.stratone.accounting.response.ResponseAccount;
 import com.stratone.accounting.response.ResponseCOA;
 import com.stratone.accounting.response.ResponseCashFlow;
 import com.stratone.accounting.response.ResponseCashFlowTotal;
@@ -23,6 +24,13 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface  ApiInterface {
+    @FormUrlEncoded
+    @POST("api/Account/Login")
+    Call<ResponseAccount> Login(
+            @Field("username") String username,
+            @Field("password") String password
+    );
+
     @FormUrlEncoded
     @POST("api/Dashboard/ChartCashFlow")
     Call<ResponseChartCashFlow> ChartCashFlow(

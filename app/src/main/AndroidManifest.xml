@@ -14,13 +14,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" ></activity>
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
